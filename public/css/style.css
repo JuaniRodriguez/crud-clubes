@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.agregar {
+    padding: 0px;
+    margin-top: 20px;
+}
+
+/*tr,th,td {
+    padding-right: 50px;
+    text-align: center;
+}*/
+
+
+
+#image {
+    max-width: 80%;
+    max-height: 80%;
+}

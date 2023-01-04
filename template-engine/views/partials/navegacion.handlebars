@@ -1,0 +1,8 @@
+{{#each teams as |team|}}
+  <tr>
+    <td>{{team.name}}</td>
+    <td>{{team.area.name}}</td>
+    <td><a href='/{{team.name}}/{{team.tla}}/ver'>VER</a>-<a>EDITAR</a>-<a>ELIMINAR</a></td>  
+  </tr>
+{{/each}}
+

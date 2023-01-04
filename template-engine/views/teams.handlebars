@@ -1,0 +1,15 @@
+<div class="header">
+    <h4>Hay {{equipos.length}} equipos</h4>
+    <a href="" class="btn btn-primary agregar ">Agregar</a>
+</div>
+
+<table class="table">
+    <tr>    
+        <th scope="col">Nombre Equipo</th>
+        <th scope="col">Pais</th>
+        <th scope="col">Accion</th>
+    </tr>
+    
+    {{>navegacion teams=equipos}}
+
+</table>
