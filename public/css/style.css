@@ -8,10 +8,14 @@
     margin-top: 20px;
 }
 
-/*tr,th,td {
-    padding-right: 50px;
+th {
     text-align: center;
-}*/
+}
+
+td {
+    text-align: center;
+}
+
 
 
 
@@ -19,3 +23,4 @@
     max-width: 80%;
     max-height: 80%;
 }
+

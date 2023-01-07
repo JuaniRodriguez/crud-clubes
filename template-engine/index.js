@@ -55,31 +55,25 @@ app.get('/',(req,res)=> {
 //The filter() method takes a callback parameter, and returns an array containing all values that the callback returned true for. 
 app.get('/:equipo/:tla/ver',(req,res)=> {
   const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
-  const equipo=equipos.filter(equipo=>equipo.tla==`${req.param('tla')}`)
-  //let plantillaEquipo;
-  //try {
-  //  plantillaEquipo=JSON.parse(fs.readFileSync(`./data/equipos/AUS.json`));
-  //} catch(e) {
-  //  plantillaEquipo="";
-  //}
-  //const plantillaEquipo= JSON.parse(fs.readFileSync(`./data/equipos/${req.param('tla')}.json`));
+  const equipo=equipos.filter(equipo=>equipo.tla==`${req.params['tla']}`)
+
     res.render('team', {
       layout:'ui',
       data: {
         equipo:equipo[0].name,
         direccion:equipo[0].address,
         imagen:equipo[0].crestUrl,
-        //plantilla:(JSON.parse(fs.readFileSync(`./data/equipos/AUS.json`))) ? (JSON.parse(fs.readFileSync(`./data/equipos/AUS.json`))).squad : ""
-        //plantilla:JSON.parse(fs.readFileSync(`./data/equipos/${req.param('tla')}.json`)).squad,
-        //largar un mensaje ("no hay plantilla ")
+        plantilla: (fs.existsSync(`./data/equipos/${req.params['tla']}.json`)) ? JSON.parse(fs.readFileSync(`./data/equipos/${req.params['tla']}.json`)).squad : ""
       }
     })
 })
 
 app.get('/:equipo/:tla/delete',(req,res)=> {
   const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
-  const equiposRestantes=equipos.filter(equipo=>equipo.tla!==`${req.param('tla')}`);
+  const equiposRestantes=equipos.filter(equipo=>equipo.tla!==`${req.params['tla']}`);
   fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equiposRestantes))
+  fs.unlinkSync(`./data/equipos/${req.params['tla']}.json`);
+
   //res.render('teams', {
   //  layout:'ui',
   //  equipos,
@@ -100,25 +94,55 @@ app.post('/form',(req,res)=> {
   const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
   equipos.push(newTeam(req.body));
   fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equipos))
+  fs.writeFileSync(`./data/equipos/${req.body.tla}.json`,JSON.stringify(req.body))
   res.redirect('/')
 
-  //res.render('show',{
-  //  layout:'ui',
-  //  form: {
-  //    name:req.body.name,
-  //    shortname:req.body.shortname,
-  //  }
-  //})
-  //console.log(req.body.name);
-  //console.log(req.body);
-  //res.send(req.body)
 });
+
+
+app.get('/:equipo/:tla/edit',(req,res)=> {
+  const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
+
+  const equipo=equipos.filter(equipo=>equipo.tla==`${req.params['tla']}`);
+  console.log(equipo)
+  console.log(equipo[0].name)
+  res.render('editForm', {
+    layout:'ui',
+    data: {
+      id:equipo[0].id,
+      area: {
+        id:equipo[0].area.id,
+        name:equipo[0].area.name,
+      },
+      name:equipo[0].name,
+      shortName:equipo[0].shortName,
+      tla:equipo[0].tla,
+      crestUrl:equipo[0].crestUrl,
+      address:equipo[0].address,
+      phone:equipo[0].phone,
+      website:equipo[0].website,
+      email:equipo[0].email,
+      founded:equipo[0].founded,
+      clubColors:equipo[0].clubColors,
+      venue:equipo[0].venue,
+      lastUpdated:(equipo[0].lastUpdated).slice(0,-10),
+
+      //plantilla: (fs.existsSync(`./data/equipos/${req.param('tla')}.json`)) ? JSON.parse(fs.readFileSync(`./data/equipos/${req.param('tla')}.json`)).squad : ""
+    }
+
+  })
+})
+app.post('/:equipo/:tla/edit',(req,res)=> {
+
+  const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
+  const equiposRestantes=equipos.filter(equipo=>equipo.tla!==`${req.body.tla}`);
+  //fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equiposRestantes));
+  equiposRestantes.push(newTeam(req.body));
+  fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equiposRestantes));
+  res.redirect('/')
+
+})
 
 //acomodar que dentro del json hay otro objeto. Y eso impide que acceda a area.name al agregar uno nuevo. Y que si pongo "ver" al nuevo que agrego no me deja porque no existe el json solo de ese equipo.
 
-
-  
-   const plantillaEquipo=JSON.parse(fs.readFileSync(`./data/equipos/AUS.json`));
-   console.log(plantillaEquipo)
-  
-  
+ //minimizar el uso de equipos.db.json, y usarlo solo para sacar nombre de listado de equipos. 
