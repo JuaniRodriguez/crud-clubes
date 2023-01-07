@@ -1,32 +1,77 @@
-
+<!--enctype="multipart/form-data"-->
 <!-- enctype="multipart/form-data" es lo que nos permite subir un archivo al servidor -->
 
-<form action="/form" method="POST" <!--enctype="multipart/form-data"-->>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label text-center">ID</label>
-    <div class="col-auto">
-      <input type="number" class="form-control" name="id" id="inputEmail3">
+<div class="container">
+  <form class="row" action="/form" method="POST">
+
+    <div class="col-6 mb-3">
+        <label for="inputEmail3" class="form-label text-center">ID</label>
+        <input type="number" class="form-control" name="id" id="inputEmail3">
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputPassword3" class="col-sm-2 col-form-label text-center">AREA</label>
-    <div class="col-sm-1">
-      <input type="number" class="form-control" name="areaId" placeholder="id" id="inputPassword3">
-      <input type="text" class="form-control" name="areaName" placeholder="name" id="inputPassword3">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label text-center">NAME</label>
-    <div class="col-sm-3">
+    <div class="col-6 mb-3">
+        <label for="inputPassword3" class="form-label text-center">AREA</label>
+        <div class="row">
+          <div class="col">
+            <input type="number" class="form-control" name="id" placeholder="id" id="inputEmail3">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" name="areaName" placeholder="name" id="inputPassword3">
+          </div>
+        </div>
+    </div>  
+
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">NAME</label>
       <input type="text" class="form-control" name="name" id="inputEmail3">
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label text-center">SHORTNAME</label>
-    <div class="col-sm-2">
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">SHORTNAME</label>
       <input type="text" class="form-control" name="shortName" id="inputEmail3">
     </div>
-  </div>
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">ADDRESS</label>
+      <input type="text" class="form-control" name="address" id="inputEmail3">
+    </div>
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">PHONE</label>
+      <input type="text" class="form-control" name="phone" id="inputEmail3">
+    </div>
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">WEBSITE</label>
+      <input type="text" class="form-control" name="website" id="inputEmail3">
+    </div>
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">EMAIL</label>
+      <input type="email" class="form-control" name="email" id="inputEmail3">
+    </div>
+
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">FOUNDED</label>
+      <input type="number" class="form-control" name="founded" id="inputEmail3">
+    </div>
+
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">CLUB COLORS</label>
+      <input type="text" class="form-control" name="clubColors" id="inputEmail3">
+    </div>
+
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">VENUE</label>
+      <input type="text" class="form-control" name="venue" id="inputEmail3">
+    </div>
+
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">LAST UPDATED</label>
+      <input type="text" class="form-control" name="lastUpdated" id="inputEmail3">
+    </div>
+
+  </form>
+</div>
+
+
+<!--
+<form action="/form" method="POST">
+  
   <div class="row mb-3">
     <label for="inputEmail3" class="col-sm-2 col-form-label text-center">TLA</label>
     <div class="col-sm-1">
@@ -39,30 +84,7 @@
       <input type="text" class="form-control" name="crestUrl" id="inputEmail3">
     </div>
   </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label text-center">ADDRESS</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" name="address" id="inputEmail3">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label text-center">PHONE</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" name="phone" id="inputEmail3">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label text-center">WEBSITE</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" name="website" id="inputEmail3">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label text-center">EMAIL</label>
-    <div class="col-sm-3">
-      <input type="email" class="form-control" name="email" id="inputEmail3">
-    </div>
-  </div>
+ 
   <div class="row mb-3">
     <label for="inputEmail3" class="col-sm-2 col-form-label text-center">FOUNDED</label>
     <div class="col-sm-1">
@@ -96,7 +118,7 @@
   </div>
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
-
+-->
 
  <!--{
      "name": "Gourav",
