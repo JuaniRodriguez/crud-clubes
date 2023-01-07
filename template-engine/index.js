@@ -60,10 +60,12 @@ app.get('/:equipo/:tla/ver',(req,res)=> {
     res.render('team', {
       layout:'ui',
       data: {
-        equipo:equipo[0].name,
-        direccion:equipo[0].address,
-        imagen:equipo[0].crestUrl,
-        plantilla: (fs.existsSync(`./data/equipos/${req.params['tla']}.json`)) ? JSON.parse(fs.readFileSync(`./data/equipos/${req.params['tla']}.json`)).squad : ""
+        name:equipo[0].name,
+        crestUrl:equipo[0].crestUrl,
+        address:equipo[0].address,
+        website:equipo[0].website,
+        founded:equipo[0].founded,
+        squad: (fs.existsSync(`./data/equipos/${req.params['tla']}.json`)) ? JSON.parse(fs.readFileSync(`./data/equipos/${req.params['tla']}.json`)).squad : ""
       }
     })
 })

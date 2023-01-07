@@ -1,26 +1,44 @@
-.header {
-    display: flex;
-    justify-content: space-evenly;
-}
 
-.agregar {
+/*.agregar {
     padding: 0px;
     margin-top: 20px;
+}*/
+
+
+.body {
+    background-color: rgb(1, 10, 22);
 }
 
-th {
-    text-align: center;
+.titulo {
+    color: white;
+    font-size: 60px;
+}
+.container {
+    margin-top: 10px;
 }
 
 td {
-    text-align: center;
+    color: black;
 }
 
-
-
+th {
+    color: black;
+}
 
 #image {
     max-width: 80%;
     max-height: 80%;
+    margin: ;
 }
 
+h4 {
+    color: white;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+#cardTitle {
+    font-size: 40px;
+}

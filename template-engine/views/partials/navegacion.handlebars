@@ -1,8 +1,8 @@
 {{#each teams as |team|}}
   <tr>
-    <td>{{team.name}}</td>
-    <td>{{team.area.name}}</td>
-    <td><a href='/{{team.name}}/{{team.tla}}/ver'>VER</a>-<a href='/{{team.name}}/{{team.tla}}/edit'>EDITAR</a>-<a href='/{{team.name}}/{{team.tla}}/delete'>ELIMINAR</a></td>  
+    <td class="text-center">{{team.name}}</td>
+    <td class="text-center">{{team.area.name}}</td>
+    <td class="text-center"><a class="link-primary" href='/{{team.name}}/{{team.tla}}/ver'>VER</a>-<a href='/{{team.name}}/{{team.tla}}/edit'>EDITAR</a>-<a href='/{{team.name}}/{{team.tla}}/delete'>ELIMINAR</a></td>  
   </tr>
 {{/each}}
 
