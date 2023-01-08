@@ -2,7 +2,7 @@
 <!-- enctype="multipart/form-data" es lo que nos permite subir un archivo al servidor -->
 
 <div class="container">
-  <form class="row" action="/form" method="POST">
+  <form class="row" action="/form" method="POST" enctype="multipart/form-data">
 
     <div class="col-6 mb-3">
         <label for="inputEmail3" class="form-label text-center">ID</label>
@@ -22,12 +22,24 @@
 
     <div class="col-6 mb-3">
       <label for="inputEmail3" class="form-label text-center">NAME</label>
-      <input type="text" class="form-control" name="name" id="inputEmail3">
+      <input type="text" class="form-control" name="name" id="inputEmail3" required>
     </div>
     <div class="col-6 mb-3">
       <label for="inputEmail3" class="form-label text-center">SHORTNAME</label>
       <input type="text" class="form-control" name="shortName" id="inputEmail3">
     </div>
+    
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">TLA</label>
+      <input type="text" class="form-control" name="tla" id="inputEmail3" required>
+    </div>
+    <div class="col-6 mb-3">
+      <label for="inputEmail3" class="form-label text-center">IMAGE</label>
+      <input type="file" class="form-control" name="imagen" id="inputEmail3">
+
+    </div>
+
+
     <div class="col-6 mb-3">
       <label for="inputEmail3" class="form-label text-center">ADDRESS</label>
       <input type="text" class="form-control" name="address" id="inputEmail3">

@@ -1,5 +1,9 @@
 const fs=require('fs');
 const express=require('express');
+const multer=require('multer');
+
+//const upload=multer({dest:'./uploads/imagenes'});
+
 const exphbs=require('express-handlebars');
 const path=require("path");
 const Handlebars = require("handlebars");
@@ -12,11 +16,22 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.engine('handlebars',hbs.engine);
 app.set('view engine','handlebars');
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+//app.use(express.static(`${__dirname}/uploads`));
 
 Handlebars.registerHelper('isNotNull', function (value) {
   return value !== null;
 });
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/imagenes');
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${req.body.shortName}`);
+  },
+});
+const upload = multer({ storage: storage });
 
 function newTeam(team) {
   //necesito esta funcion porque el form me devuelve un objeto, pero "area" es otro objeto dentro de objeto.
@@ -29,7 +44,7 @@ function newTeam(team) {
     name:team.name,
     shortName:team.shortName,
     tla:team.tla,
-    crestUrl:team.crestUrl,
+    //crestUrl:team.crestUrl,
     address:team.address,
     phone:team.phone,
     website:team.website,
@@ -92,7 +107,7 @@ app.get('/form',(req,res)=> {
   })
 })
 
-app.post('/form',(req,res)=> {
+app.post('/form', upload.single('imagen'),(req,res)=> {
   const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
   equipos.push(newTeam(req.body));
   fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equipos))
