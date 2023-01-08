@@ -17,7 +17,7 @@ app.engine('handlebars',hbs.engine);
 app.set('view engine','handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use(express.static(`${__dirname}/uploads`));
+app.use(express.static(`${__dirname}/uploads`));
 
 Handlebars.registerHelper('isNotNull', function (value) {
   return value !== null;
@@ -28,13 +28,14 @@ const storage = multer.diskStorage({
     cb(null, './uploads/imagenes');
   },
   filename: function (req, file, cb) {
-    cb(null, `${req.body.shortName}`);
+    cb(null, `${req.body.shortName}.jpg`);
   },
 });
 const upload = multer({ storage: storage });
 
-function newTeam(team) {
+function newTeam(team,file) {
   //necesito esta funcion porque el form me devuelve un objeto, pero "area" es otro objeto dentro de objeto.
+  console.log(file)
   const newTeam= {
     id:team.id,
     area: {
@@ -44,7 +45,7 @@ function newTeam(team) {
     name:team.name,
     shortName:team.shortName,
     tla:team.tla,
-    //crestUrl:team.crestUrl,
+    crestUrl:  (file=="crest") ? team.crestUrl : `/imagenes/${file}`,/*(team.uploadedImage!=="") ? `/imagenes/${team.file.originalname}` : team.urlImage,*/
     address:team.address,
     phone:team.phone,
     website:team.website,
@@ -107,9 +108,10 @@ app.get('/form',(req,res)=> {
   })
 })
 
-app.post('/form', upload.single('imagen'),(req,res)=> {
+app.post('/form', upload.single('uploadedImage'),(req,res)=> {
   const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
-  equipos.push(newTeam(req.body));
+  console.log(req.file)
+  equipos.push(newTeam(req.body,(req.file!==undefined) ? req.file.filename : "crest"));
   fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equipos))
   fs.writeFileSync(`./data/equipos/${req.body.tla}.json`,JSON.stringify(req.body))
   res.redirect('/')
