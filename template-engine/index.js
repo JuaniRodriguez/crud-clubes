@@ -45,7 +45,7 @@ function newTeam(team,file) {
     name:team.name,
     shortName:team.shortName,
     tla:team.tla,
-    crestUrl:  (file=="crest") ? team.crestUrl : `/imagenes/${file}`,/*(team.uploadedImage!=="") ? `/imagenes/${team.file.originalname}` : team.urlImage,*/
+    crestUrl:  (file==="crest") ? team.urlImage : `/imagenes/${file}`,/*(team.uploadedImage!=="") ? `/imagenes/${team.file.originalname}` : team.urlImage,*/
     address:team.address,
     phone:team.phone,
     website:team.website,
