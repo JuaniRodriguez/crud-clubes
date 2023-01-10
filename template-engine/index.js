@@ -91,12 +91,6 @@ app.get('/:equipo/:tla/delete',(req,res)=> {
   const equiposRestantes=equipos.filter(equipo=>equipo.tla!==`${req.params['tla']}`);
   fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equiposRestantes))
   fs.unlinkSync(`./data/equipos/${req.params['tla']}.json`);
-
-  //res.render('teams', {
-  //  layout:'ui',
-  //  equipos,
-  //})
-  //console.log(JSON.stringify(equiposRestantes))
   res.redirect('/')
 })
 
@@ -151,17 +145,17 @@ app.get('/:equipo/:tla/edit',(req,res)=> {
 
   })
 })
-app.post('/:equipo/:tla/edit',(req,res)=> {
+app.post('/:equipo/:tla/edit', upload.single('uploadedImage'),(req,res)=> {
 
   const equipos=JSON.parse(fs.readFileSync('./data/equipos.db.json'));
   const equiposRestantes=equipos.filter(equipo=>equipo.tla!==`${req.body.tla}`);
   //fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equiposRestantes));
-  equiposRestantes.push(newTeam(req.body));
+  equiposRestantes.push(newTeam(req.body,(req.file!==undefined) ? req.file.filename : "crest"));
   fs.writeFileSync('./data/equipos.db.json',JSON.stringify(equiposRestantes));
   res.redirect('/')
 
 })
 
-//acomodar que dentro del json hay otro objeto. Y eso impide que acceda a area.name al agregar uno nuevo. Y que si pongo "ver" al nuevo que agrego no me deja porque no existe el json solo de ese equipo.
-
- //minimizar el uso de equipos.db.json, y usarlo solo para sacar nombre de listado de equipos. 
+//ver como se van agregando y eliminando los .json
+//agregar que no se pueda agregar un id si ya hay un equipo existente con ese id.
+//home button
